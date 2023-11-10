@@ -1,4 +1,5 @@
 
+using CleanArch.Infra.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -13,5 +14,15 @@ public partial class CleanArchContext : DbContext
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
         _configuration = builder.Build();
+    }
+
+    public virtual DbSet<CustomerEntity> Customer { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if(!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
+        }
     }
 }
