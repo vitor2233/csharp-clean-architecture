@@ -21,4 +21,23 @@ public class CustomerController : ControllerBase
         return _business.GetCustomers();
     }
 
+    [HttpPost(Name = "CreateCustomer")]
+    public Customer CreateCustomer([FromBody] CustomerCreate customer)
+    {
+        return _business.CreateCustomer(customer);
+    }
+
+    [HttpPut(Name = "UpdateCustomer")]
+    public Customer UpdateCustomer([FromBody] Customer customer)
+    {
+        return _business.UpdateCustomer(customer);
+    }
+
+    [HttpDelete(Name = "DeleteCustomer/{id}")]
+    public ActionResult DeleteCustomer(int id)
+    {
+        _business.DeleteCustomer(id);
+        return Ok();
+    }
+
 }

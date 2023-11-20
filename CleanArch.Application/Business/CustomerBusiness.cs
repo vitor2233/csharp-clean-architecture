@@ -15,4 +15,20 @@ public class CustomerBusiness : ICustomerBusiness
     {
         return _repository.GetCustomers();
     }
+
+    public Customer CreateCustomer(CustomerCreate customer)
+    {
+        return _repository.CreateCustomer(customer);
+    }
+
+    public Customer UpdateCustomer(Customer customer)
+    {
+        return _repository.UpdateCustomer(customer);
+    }
+
+    public void DeleteCustomer(int id)
+    {
+        _repository.DeleteCustomer(id);
+    }
+    
 }

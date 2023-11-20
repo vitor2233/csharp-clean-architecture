@@ -1,11 +1,19 @@
+using AutoMapper;
+using CleanArch.Application.Business;
+using CleanArch.Infra;
+using CleanArch.Infra.Mapper;
+using CleanArch.Infra.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ICustomerBusiness, CustomerBusiness>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddDbContext<CleanArchContext>();
 
 var app = builder.Build();
 
